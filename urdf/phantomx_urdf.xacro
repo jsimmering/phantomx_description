@@ -13,14 +13,14 @@
       <joint name="j_phantomx_attachment" type="fixed">
         <parent link="${parent}"/>
         <child link="MP_BODY"/>
-        <insert_block name="origin" />
+        <xacro:insert_block name="origin" />
       </joint>
       
 
       <link name="MP_BODY">
         <inertial>
           <origin xyz="0 0 0" />
-          <mass value="0.97559947"/>
+          <mass value="2.27559947"/>
           <inertia ixx="3.1081800"  ixy="-0.25460189"  ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425" />
         </inertial>
         <visual>
@@ -39,15 +39,12 @@
           <geometry>
             <mesh filename="package://phantomx_description/meshes/body_coll.STL"  scale="1 1 1"/>
           </geometry>
-
         </collision>
       </link>
 
-
       <gazebo reference="MP_BODY">    
-        <material>Gazebo/Grey</material>
+        <material>Gazebo/Orange</material>
       </gazebo>
-
 
     <xacro:leg_l xyz="0.1248 -0.06164  0.001116"  rpy="0 4.7123 0.7853981633974483" suffix="rf"/>
     <xacro:leg_l xyz="0 -0.1034  0.001116"  rpy="0 4.7123 0" suffix="rm"/>
@@ -71,7 +68,7 @@
   <link name="c1_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.024357719"/>
+      <mass value="0.524357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -96,7 +93,7 @@
   <link name="c2_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.024357719"/>
+      <mass value="0.524357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -122,7 +119,7 @@
   <link name="thigh_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"  />
-      <mass value="0.024357719"/>
+      <mass value="0.524357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -148,7 +145,7 @@
   <link name="tibia_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"  />
-      <mass value="0.024357719"/>
+      <mass value="0.524357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -166,10 +163,41 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL"  scale="1 1 1"/>
       </geometry>
+      <!--surface>
+          <friction>
+            <ode>
+              <mu>1000000.0</mu>
+              <mu2>1000000.0</mu2>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+        </surface-->
     </collision>
   </link>
 
-
+  <!--link name="contact_sensor_${suffix}">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0"/>
+     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.005 0.011 0.005" />
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.20 0.20 0.20 1.0"/>
+      </material>
+    </visual>
+    <collision name="collision_${suffix}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.005 0.011 0.005" />
+      </geometry>
+    </collision>
+  </link-->
 
   <joint name="j_c1_${suffix}" type="revolute">
     <parent link="MP_BODY"/>
@@ -202,15 +230,19 @@
     <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
-
+  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
+    <parent link="tibia_${suffix}"/>
+    <child link="contact_sensor_${suffix}"/>
+    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
+  </joint-->
 
    <transmission name="t_c1_${suffix}">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>    
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="m_c1_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -219,10 +251,10 @@
    <transmission name="t_thigh_${suffix}">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_thigh_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>    
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="m_thigh_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -231,22 +263,20 @@
    <transmission name="t_tibia_${suffix}">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_tibia_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="m_tibia_${suffix}">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-
-
 
   <gazebo reference="c1_${suffix}">    
     <material>Gazebo/Grey</material>
   </gazebo>
 
   <gazebo reference="c2_${suffix}">    
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Orange</material>
   </gazebo>
 
   <gazebo reference="thigh_${suffix}">    
@@ -254,9 +284,8 @@
   </gazebo>
 
   <gazebo reference="tibia_${suffix}">    
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Orange</material>
   </gazebo>
-
   
 </xacro:macro>
 

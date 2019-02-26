@@ -113,7 +113,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -123,7 +123,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
@@ -310,7 +310,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -320,7 +320,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
@@ -507,7 +507,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -517,7 +517,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
@@ -704,7 +704,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -714,7 +714,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
@@ -901,7 +901,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -911,7 +911,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
@@ -1098,7 +1098,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
@@ -1108,7 +1108,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>

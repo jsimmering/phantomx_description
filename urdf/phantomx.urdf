@@ -10,10 +10,13 @@
     <child link="MP_BODY"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
+  <gazebo reference="j_phantomx_attachment">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
   <link name="MP_BODY">
     <inertial>
       <origin xyz="0 0 0"/>
-      <mass value="2.27559947"/>
+      <mass value="1.97559947"/>
       <inertia ixx="3.1081800" ixy="-0.25460189" ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425"/>
     </inertial>
     <visual>
@@ -36,6 +39,8 @@
   </link>
   <gazebo reference="MP_BODY">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
   </gazebo>
   <link name="c1_rf">
     <inertial>
@@ -44,7 +49,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -67,7 +72,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -108,14 +113,13 @@
   </link>
   <link name="tibia_rf">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -127,46 +131,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_rf" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_rf"/>
     <origin rpy="0 4.7123 0.7853981633974483" xyz="0.1248 -0.06164  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_rf" type="fixed">
     <parent link="c1_rf"/>
@@ -178,20 +150,15 @@
     <child link="thigh_rf"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_rf" type="revolute">
     <parent link="thigh_rf"/>
     <child link="tibia_rf"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_rf">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_rf">
@@ -224,15 +191,32 @@
   </transmission>
   <gazebo reference="c1_rf">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_rf">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_rf">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_rf">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_rf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_rf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_rf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_rf">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <link name="c1_rm">
     <inertial>
@@ -241,7 +225,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -264,7 +248,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -305,14 +289,13 @@
   </link>
   <link name="tibia_rm">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -324,46 +307,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_rm" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_rm"/>
     <origin rpy="0 4.7123 0" xyz="0 -0.1034  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_rm" type="fixed">
     <parent link="c1_rm"/>
@@ -375,20 +326,15 @@
     <child link="thigh_rm"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_rm" type="revolute">
     <parent link="thigh_rm"/>
     <child link="tibia_rm"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_rm">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_rm">
@@ -421,15 +367,32 @@
   </transmission>
   <gazebo reference="c1_rm">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_rm">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_rm">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_rm">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_rm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_rm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_rm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_rm">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <link name="c1_rr">
     <inertial>
@@ -438,7 +401,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -461,7 +424,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -502,14 +465,13 @@
   </link>
   <link name="tibia_rr">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -521,46 +483,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_rr" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_rr"/>
     <origin rpy="0 4.7123 -0.7853981633974483" xyz="-0.1248 -0.06164  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_rr" type="fixed">
     <parent link="c1_rr"/>
@@ -572,20 +502,15 @@
     <child link="thigh_rr"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_rr" type="revolute">
     <parent link="thigh_rr"/>
     <child link="tibia_rr"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_rr">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_rr">
@@ -618,15 +543,32 @@
   </transmission>
   <gazebo reference="c1_rr">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_rr">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_rr">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_rr">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_rr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_rr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_rr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_rr">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <link name="c1_lf">
     <inertial>
@@ -635,7 +577,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -658,7 +600,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -699,14 +641,13 @@
   </link>
   <link name="tibia_lf">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -718,46 +659,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_lf" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_lf"/>
     <origin rpy="0 4.7123 2.356194490192345" xyz="0.1248 0.06164  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_lf" type="fixed">
     <parent link="c1_lf"/>
@@ -769,20 +678,15 @@
     <child link="thigh_lf"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_lf" type="revolute">
     <parent link="thigh_lf"/>
     <child link="tibia_lf"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_lf">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_lf">
@@ -815,15 +719,32 @@
   </transmission>
   <gazebo reference="c1_lf">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_lf">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_lf">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_lf">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_lf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_lf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_lf">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_lf">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <link name="c1_lm">
     <inertial>
@@ -832,7 +753,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -855,7 +776,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -896,14 +817,13 @@
   </link>
   <link name="tibia_lm">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -915,46 +835,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_lm" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_lm"/>
     <origin rpy="0 4.7123 3.14159" xyz="0 0.1034  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_lm" type="fixed">
     <parent link="c1_lm"/>
@@ -966,20 +854,15 @@
     <child link="thigh_lm"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_lm" type="revolute">
     <parent link="thigh_lm"/>
     <child link="tibia_lm"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_lm">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_lm">
@@ -1012,15 +895,32 @@
   </transmission>
   <gazebo reference="c1_lm">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_lm">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_lm">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_lm">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_lm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_lm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_lm">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_lm">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <link name="c1_lr">
     <inertial>
@@ -1029,7 +929,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -1052,7 +952,7 @@
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0252 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.02633 0"/>
       <geometry>
         <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/connect.STL" scale="1 1 1"/>
@@ -1093,14 +993,13 @@
   </link>
   <link name="tibia_lr">
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-5 0 0" xyz="0 0 0"/>
       <mass value="0.524357719"/>
       <inertia ixx="0.0051411124" ixy="-0.00057530255" ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812"/>
     </inertial>
     <visual>
       <origin rpy="-5 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--box size="0.045 0.022 0.0325" /-->
         <mesh filename="package://phantomx_description/meshes/tibia_l.STL" scale="1 1 1"/>
       </geometry>
       <material name="Grey">
@@ -1112,46 +1011,14 @@
       <geometry>
         <mesh filename="package://phantomx_description/meshes/tibia_l_coll.STL" scale="1 1 1"/>
       </geometry>
-      <!--surface>
-          <friction>
-            <ode>
-              <mu>1000000.0</mu>
-              <mu2>1000000.0</mu2>
-              <slip1>0.0</slip1>
-              <slip2>0.0</slip2>
-            </ode>
-          </friction>
-        </surface-->
     </collision>
   </link>
-  <!--link name="contact_sensor_${suffix}">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <mass value="0"/>
-     <inertia ixx="0.0"  ixy="0.0"  ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-      <material name="Grey">
-        <color rgba="0.20 0.20 0.20 1.0"/>
-      </material>
-    </visual>
-    <collision name="collision_${suffix}">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="0.005 0.011 0.005" />
-      </geometry>
-    </collision>
-  </link-->
   <joint name="j_c1_lr" type="revolute">
     <parent link="MP_BODY"/>
     <child link="c1_lr"/>
     <origin rpy="0 4.7123 3.9269908169872414" xyz="-0.1248 0.06164  0.001116"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_c2_lr" type="fixed">
     <parent link="c1_lr"/>
@@ -1163,20 +1030,15 @@
     <child link="thigh_lr"/>
     <origin rpy=" 0 3.14159 3.14159" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.5179939" upper="2.5179939" velocity="5.6548668"/>
   </joint>
   <joint name="j_tibia_lr" type="revolute">
     <parent link="thigh_lr"/>
     <child link="tibia_lr"/>
     <origin rpy="-1.5707 0 3.14159" xyz="0 -0.0645 -0.0145"/>
     <axis xyz="1 0 0"/>
-    <limit effort="2.8" lower="-2.6179939" upper="2.6179939" velocity="5.6548668"/>
+    <limit effort="2.8" lower="-2.6179939" upper="0.6179939" velocity="5.6548668"/>
   </joint>
-  <!--joint name="j_contact_sensor_${suffix}" type="fixed">
-    <parent link="tibia_${suffix}"/>
-    <child link="contact_sensor_${suffix}"/>
-    <origin xyz="0.0017 0.1602 0.029" rpy="0 0 0" />
-  </joint-->
   <transmission name="t_c1_lr">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_c1_lr">
@@ -1209,15 +1071,32 @@
   </transmission>
   <gazebo reference="c1_lr">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="c2_lr">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="thigh_lr">
     <material>Gazebo/Grey</material>
+    <dampingFactor>.1</dampingFactor>
   </gazebo>
   <gazebo reference="tibia_lr">
     <material>Gazebo/Orange</material>
+    <dampingFactor>.1</dampingFactor>
+    <selfCollide>1</selfCollide>
+  </gazebo>
+  <gazebo reference="j_c1_lr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_c2_lr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_thigh_lr">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="j_tibia_lr">
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">

@@ -46,7 +46,7 @@
 
       <gazebo reference="MP_BODY">
         <material>Gazebo/Orange</material>
-        <dampingFactor>.1</dampingFactor>
+        <dampingFactor>0.001</dampingFactor>
         <selfCollide>1</selfCollide>
       </gazebo>
 
@@ -72,7 +72,7 @@
   <link name="c1_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.524357719"/>
+      <mass value="0.324357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -97,7 +97,7 @@
   <link name="c2_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.524357719"/>
+      <mass value="0.324357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -123,7 +123,7 @@
   <link name="thigh_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"  />
-      <mass value="0.524357719"/>
+      <mass value="0.324357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -147,7 +147,7 @@
   <link name="tibia_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="-5 0 0"  />
-      <mass value="0.524357719"/>
+      <mass value="0.324357719"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -233,23 +233,22 @@
 
   <gazebo reference="c1_${suffix}">
     <material>Gazebo/Grey</material>
-        <dampingFactor>.1</dampingFactor>
+        <dampingFactor>.001</dampingFactor>
   </gazebo>
 
   <gazebo reference="c2_${suffix}">
     <material>Gazebo/Orange</material>
-        <dampingFactor>.1</dampingFactor>
+        <dampingFactor>.01</dampingFactor>
   </gazebo>
 
   <gazebo reference="thigh_${suffix}">
     <material>Gazebo/Grey</material>
-        <dampingFactor>.1</dampingFactor>
+        <dampingFactor>.01</dampingFactor>
   </gazebo>
 
   <gazebo reference="tibia_${suffix}">
     <material>Gazebo/Orange</material>
-        <dampingFactor>.1</dampingFactor>
-
+        <dampingFactor>.01</dampingFactor>
         <selfCollide>1</selfCollide>
   </gazebo>
 

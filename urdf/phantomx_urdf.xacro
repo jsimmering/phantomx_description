@@ -172,7 +172,7 @@
     <child link="c1_${suffix}"/>
     <origin xyz="${xyz}" rpy="${rpy}" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.5179939" upper="2.5179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.523599" upper="0.523599" />
   </joint>
 
   <joint name="j_c2_${suffix}" type="fixed">
@@ -187,7 +187,7 @@
     <child link="thigh_${suffix}"/>
     <origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.5179939" upper="2.5179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5708" upper="1.5708" />
   </joint>
 
   <joint name="j_tibia_${suffix}" type="revolute">
@@ -195,7 +195,7 @@
     <child link="tibia_${suffix}"/>
     <origin xyz="0 ${thigh_offset_y} ${thigh_offset_z}" rpy="-1.5707 0 3.14159" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="0.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5708" upper="0.6179939" />
   </joint>
 
    <transmission name="t_c1_${suffix}">

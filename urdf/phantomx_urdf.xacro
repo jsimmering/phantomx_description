@@ -22,7 +22,7 @@
       <link name="MP_BODY">
         <inertial>
           <origin xyz="0 0 0" />
-          <mass value="1.97559947"/>
+          <mass value="1.4"/>
           <inertia ixx="3.1081800"  ixy="-0.25460189"  ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425" />
         </inertial>
         <visual>
@@ -72,7 +72,7 @@
   <link name="c1_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.324357719"/>
+      <mass value="0.015"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -97,7 +97,7 @@
   <link name="c2_${suffix}">
     <inertial>
       <origin xyz="0 -${connect_offset} 0" rpy="0 0 0"  />
-      <mass value="0.324357719"/>
+      <mass value="0.015"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -123,7 +123,7 @@
   <link name="thigh_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"  />
-      <mass value="0.324357719"/>
+      <mass value="0.07"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -147,7 +147,7 @@
   <link name="tibia_${suffix}">
     <inertial>
       <origin xyz="0 0 0" rpy="-5 0 0"  />
-      <mass value="0.324357719"/>
+      <mass value="0.08"/>
      <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
     <visual>
@@ -172,7 +172,7 @@
     <child link="c1_${suffix}"/>
     <origin xyz="${xyz}" rpy="${rpy}" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-0.523599" upper="0.523599" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.0" upper="1.0" />
   </joint>
 
   <joint name="j_c2_${suffix}" type="fixed">
@@ -187,7 +187,7 @@
     <child link="thigh_${suffix}"/>
     <origin xyz="0 0 0" rpy=" 0 3.14159 3.14159" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-1.5708" upper="1.5708" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.25" upper="2.25" />
   </joint>
 
   <joint name="j_tibia_${suffix}" type="revolute">
@@ -195,7 +195,7 @@
     <child link="tibia_${suffix}"/>
     <origin xyz="0 ${thigh_offset_y} ${thigh_offset_z}" rpy="-1.5707 0 3.14159" />
     <axis xyz="1 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-1.5708" upper="0.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.75" upper="1.0" />
   </joint>
 
    <transmission name="t_c1_${suffix}">
